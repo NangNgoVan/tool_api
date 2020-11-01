@@ -1,0 +1,67 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  title Limitless - Responsive Web Application Kit by Eugene Kopyov
+  // Global stylesheets
+  link(href='https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900' rel='stylesheet' type='text/css')
+  link(href='.assets/css/icons/icomoon/styles.css' rel='stylesheet' type='text/css')
+  link(href='/assets/css/bootstrap.css' rel='stylesheet' type='text/css')
+  link(href='/assets/css/core.css' rel='stylesheet' type='text/css')
+  link(href='/assets/css/components.css' rel='stylesheet' type='text/css')
+  link(href='/assets/css/colors.css' rel='stylesheet' type='text/css')
+  // /global stylesheets
+  // Core JS files
+  script(type='text/javascript' src='/assets/js/plugins/loaders/pace.min.js')
+  script(type='text/javascript' src='/assets/js/core/libraries/jquery.min.js')
+  script(type='text/javascript' src='/assets/js/core/libraries/bootstrap.min.js')
+  script(type='text/javascript' src='/assets/js/plugins/loaders/blockui.min.js')
+  // /core JS files
+  // Theme JS files
+  script(type='text/javascript' src='/assets/js/plugins/forms/styling/uniform.min.js')
+  script(type='text/javascript' src='/assets/js/core/app.js')
+  script(type='text/javascript' src='/assets/js/pages/login.js')
+  // /theme JS files
+body(class='login-container')
+  // Page container
+  .page-container
+    // Page content
+    .page-content
+      // Main content
+      .content-wrapper
+        // Content area
+        .content.pb-20
+          // Advanced login
+          form(action='index.html')
+            .panel.panel-body.login-form
+              .text-center
+                h5.content-group-lg
+                  | Đăng nhập, Quản trị viên 
+                  small.display-block Nhập thông tin xác thực
+              .form-group.has-feedback.has-feedback-left
+                input.form-control(type='text' placeholder='Tên đăng nhập')
+                .form-control-feedback
+                  i.icon-user.text-muted
+              .form-group.has-feedback.has-feedback-left
+                input.form-control(type='text' placeholder='Mật khẩu')
+                .form-control-feedback
+                  i.icon-lock2.text-muted
+              .form-group.login-options
+                .row
+                  .col-sm-12.text-right
+                    a(href='login_password_recover.html') Quên mật khẩu?
+              .form-group
+                button.btn.bg-blue.btn-block(type='submit')
+                  | Đăng nhập 
+                  i.icon-arrow-right14.position-right
+              span.help-block.text-center.no-margin
+                | By continuing, you&apos;re confirming that you&apos;ve read our 
+                a(href='#') Terms &amp; Conditions
+                |  and 
+                a(href='#') Cookie Policy
+          // /advanced login
+        // /content area
+      // /main content
+    // /page content
+  // /page container
