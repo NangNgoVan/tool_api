@@ -4,14 +4,29 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+require('dotenv').config();
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
+var apps = require('./routes/apps');
 
 var app = express();
 
-// view engine setup
+// check connect mongodb
+var mongoUser = process.env.MONGO_DB_USER;
+var mongoPass = process.env.MONGO_DB_PASS;
+var mongoHost = process.env.MONGO_DB_HOST;
+
+var mongoUrl = "mongodb://"+mongoUser+":"+mongoPass+"@ds147599.mlab.com:47599/"+mongoHost+"";
+mongoose.connect(mongoUrl, {useNewUrlParser: true,useUnifiedTopology: true});
+const db = mongoose.connection;
+// view edb.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('db connected');
+});
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -26,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/admin', admin);
+app.use('/apps', apps);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,96 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  title Limitless - Responsive Web Application Kit by Eugene Kopyov
+  // Global stylesheets
+  link(href='https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900' rel='stylesheet' type='text/css')
+  link(href='/assets/css/icons/icomoon/styles.css' rel='stylesheet' type='text/css')
+  link(href='/assets/css/bootstrap.css' rel='stylesheet' type='text/css')
+  link(href='/assets/css/core.css' rel='stylesheet' type='text/css')
+  link(href='/assets/css/components.css' rel='stylesheet' type='text/css')
+  link(href='/assets/css/colors.css' rel='stylesheet' type='text/css')
+  // /global stylesheets
+  // Core JS files
+  script(type='text/javascript' src='/assets/js/plugins/loaders/pace.min.js')
+  script(type='text/javascript' src='/assets/js/core/libraries/jquery.min.js')
+  script(type='text/javascript' src='/assets/js/core/libraries/bootstrap.min.js')
+  script(type='text/javascript' src='/assets/js/plugins/loaders/blockui.min.js')
+  script(type='text/javascript' src='/assets/js/plugins/notifications/sweet_alert.min.js')
+  // /core JS files
+  // Theme JS files
+  script(type='text/javascript' src='/assets/js/plugins/forms/styling/uniform.min.js')
+  script(type='text/javascript' src='/assets/js/core/app.js')
+  script(type='text/javascript' src='/assets/js/pages/login.js')
+  // /theme JS files
+.login-container
+  // Page container
+  .page-container
+    // Page content
+    .page-content
+      // Main content
+      .content-wrapper
+        // Content area
+        .content
+          // Advanced login
+          .login-form
+              .text-center
+                .icon-object.border-warning-400.text-warning-400
+                  i.icon-people
+                h5.content-group-lg
+                  | Cảm ơn bạn!
+                  small.display-block Vui lòng điền thông tin để lấy mã đăng nhập cho FB tool.
+              .form-group.has-feedback.has-feedback-left
+                input.form-control.input-lg(type='email' name='email' placeholder='Địa chỉ email của bạn' required)
+                .form-control-feedback
+                  i.icon-user.text-muted
+              .form-group.has-feedback.has-feedback-left
+                select.form-control(name='license-type')
+                  option(value="0") Dùng thử (3 ngày)
+                  option(value='1') 1 năm (365 ngày)
+                  option(value='2') Vĩnh viễn
+                .form-control-feedback
+                  i.icon-calendar.text-muted
+              .form-group
+                button.btn.bg-blue.btn-block.btn-lg(type='submit')
+                  | Lấy mã đăng nhập 
+                  i.icon-arrow-right14.position-right
+              span.help-block.text-center.no-margin
+                | Mã đăng nhập sẽ được gửi đến địa chỉ mail bạn đã đăng ký. Vui lòng kiểm tra hòm thư của bạn.
+          // /advanced login
+        // /content area
+      // /main content
+    // /page content
+    script.
+        $(function(){
+            var loginBtn = $('.btn');
+            loginBtn.on('click', function(){
+                var email = $('input[name=email]').val();
+                var licenseType = $('select[name=license-type]').val();
+
+                if ((email == undefined) || (email.length == 0))
+                {
+                    swal({
+                        title: "Email không được bỏ trống!",
+                        confirmButtonColor: "red"
+                    });
+                    return;
+                }
+
+                $.post('/apps/fb-tool/license', {email:email, licenseType: licenseType})
+                    .done(function(){
+                        swal({
+                            title: "Thành công!\n Hãy kiểm tra hòm thư của bạn.",
+                            confirmButtonColor: "blue"
+                        })
+                    })
+                    .fail(function(){
+                        swal({
+                            title: "Đã có lỗi xảy ra!",
+                            confirmButtonColor: "red"
+                        })
+                    });
+            });
+        });
+  // /page container
